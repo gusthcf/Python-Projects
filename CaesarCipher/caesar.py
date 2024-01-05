@@ -23,19 +23,18 @@ def atribuiLetras(texto, alfabetoAleatorio):
 
 
 def decodifica(texto):
-    scores = []
-    frases = []
+    maiorScore = float('-inf')
+    frase = ''
     for i in range(0, 27, 1):
         letrasFinais = alfabeto[0:i]
         letrasIniciais = alfabeto[i:]
         alfabetoDeTraducao = letrasIniciais + letrasFinais
         textoDecodificado = atribuiLetras(texto, alfabetoDeTraducao)
         score = fitness.score(textoDecodificado)
-        scores.append(score)
-        frases.append(textoDecodificado)
-    indiceMaiorScore = scores.index(max(scores))
-    textoDecodificado = frases[indiceMaiorScore]
-    return textoDecodificado
+        if score > maiorScore:
+            maiorScore = score
+            frase = textoDecodificado
+    return frase
 
 
 # na main, recebemos o texto em binario ou string
